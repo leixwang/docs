@@ -1,4 +1,11 @@
 module.exports = {
+	head: [
+		['link', {
+			rel: 'shortcut icon',
+			type: "image/x-icon",
+			href: `./favicon.ico`
+		}]
+	],
 	title: 'Leix Wang',
 	description: '多年的笔记文档整理.',
 	host: '0.0.0.0',
