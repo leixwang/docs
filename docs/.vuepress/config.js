@@ -129,6 +129,13 @@ module.exports = {
 				]
 			},
 			{
+				title: 'Matrix-synapse',
+				collapsable: true,
+				children: [
+					'/markdown/matrix-synapse/',
+				]
+			},
+			{
 				title: 'Open SIP 文档',
 				collapsable: true,
 				children: [

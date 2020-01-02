@@ -300,26 +300,72 @@ python -m synapse.app.homeserver \
   --report-stats=yes|no
  ```
 
-# certbot 自动更新 HTTPS 证书
+==============================================================================
+
+## certbot 自动更新 HTTPS 证书
 
 安装好了 Certbot，给网站安装好了 SSL 证书.
 
-## 五、创建 Cron 文件
+### Install SSL Letsencrypt Certificates
+
+安装 letsencrypt 软件
+
+```sh
+sudo apt install letsencrypt -y
+```
+
+如果启动 nginx 服务, 需要将它关掉, 再去生成新的证书.
+
+```sh
+sudo sytemctl stop nginx
+```
+
+dms.pub 生成新的证书.
+
+```sh
+certbot certonly --rsa-key-size 2048 --standalone --agree-tos --no-eff-email --email admin@dms.pub -d dms.pub
+or
+certbot certonly --nginx -d dms.pub
+```
+
+生成新的证书放在 '/etc/letsencrypt/live/' 目录下.
+
+### nginx 配置文件
+
+```sh
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    server_name dms.pub;
+
+    ssl on;
+    ssl_certificate /etc/letsencrypt/live/dms.pub/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/dms.pub/privkey.pem;
+
+    location / {
+        proxy_pass http://localhost:8008;
+        proxy_set_header X-Forwarded-For $remote_addr;
+    }
+}
+```
+
+### 创建 Cron 文件
+
 输入以下命令：
 
 1. 查看crontab定时执行任务列表
 
 ```sh
 crontab -l
-````
+```
 
 2. 添加crontab定时执行任务
 
 ```sh
 crontab -e
-````
+```
 
-## 六、添加编辑 Certbot 的自动续期命令
+### 添加编辑 Certbot 的自动续期命令
 
 在 root cron 文件中，复制以下代码，粘贴，保存，上传。
 
@@ -329,7 +375,7 @@ crontab -e
 
 以上含义是：每隔 7 天，夜里 3 点整自动执行检查续期命令一次。续期完成后，重启 nginx 服务。
 
-### 七、重启 Cron 服务，使之生效
+### 重启 Cron 服务，使之生效
 
 ```sh
 systemctl restart cron.service
@@ -337,7 +383,8 @@ systemctl restart cron.service
 
 重启之后，一切搞定！
 
-## 八、你想手动尝试 Certbot 证书更新？
+### 想手动尝试 Certbot 证书更新？
+
 一般是直接使用 renew 命令，即：
 
 ```sh
