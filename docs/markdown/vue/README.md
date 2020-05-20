@@ -155,3 +155,24 @@ In addition, the template supports some advanced features such as:
 - Auto injection and XSS prevention when embedding Vuex state for client-side hydration.
 
 We will discuss these when we introduce the associated concepts later in the guide.
+
+
+
+
+
+
+
+# VUE基本DEMO
+
+频繁用 vue 创建新的项目, 基本功能模块基本一样, 所以为了不必每个项目都重新搭建基本框架. 也为快速的创建一个上期而做的 DEMO. 下面记录搭建基本框架的步骤和方法. 随着软件包的更新而更新.
+
+
+
+## 创建vue项目
+
+
+
+```vue
+$ vue create vue-demo
+```
+
