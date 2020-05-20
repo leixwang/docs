@@ -40,25 +40,52 @@ Verify the Installation
 Verify that Redis is running with redis-cli:
 
 ```sh
-redis-cli -h 127.0.0.1 -p 5004
+redis-cli -h 127.0.0.1 -p 6379
 ```
 
+
+
+##### 构建Redis服务器 [512M]
+
 配置`redis`文件如下:
-```sh
+
+```
 sudo vim /etc/redis.conf
 ```
 
+##### redis.conf
 
-
-redis.conf
-
-```
+```sh
+参
 # 设置最大使用内存 512MB
 maxmemory 512mb
 
 # 设置客户端最多连接数量
 maxclients 128
 
+# bind
+bind 0.0.0.0
+
+# 首先将 daemonize 由 no 改成 yes，表示允许 Redis 在后台启动
+daemonize yes
+
+# 设置密码
+requirepass b840fc02d52404
+
+# protected-mode 设置为 no 关闭保护模式
+protected-mode yes
+
+```
+
+
+
+##### 使用客户端连接redis.
+
+```shell
+$ redis-cli -h redis.edms.site -a b840fc02d52404
+
+redis.edms.site:6379> info
+redis.edms.site:6379> exit
 ```
 
 

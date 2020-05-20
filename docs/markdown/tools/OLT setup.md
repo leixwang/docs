@@ -1,6 +1,7 @@
-#OLT开局设置
-##一、连接设备
-```
+# OLT开局设置
+## 一、连接设备
+
+```sh
 $ telnet 10.11.104.2
 Trying 10.11.104.2...
 Connected to 10.11.104.2.
@@ -10,7 +11,10 @@ Connected to 10.11.104.2.
 WINDAKA-OLT>enable       //开启特权模式
 WINDAKA-OLT#config       //开启全局配置模式
 ```
-##二、配置OLT设备名
+
+
+## 二、配置OLT设备名
+
 ```
 MA5680T(config)#sysname WINDAKA-OLT	            //设置OLT名称
 WINDAKA-OLT(config)#terminal user name          //添加操作用户root
@@ -26,7 +30,8 @@ Adding user succeeds
 Repeat this operation? (y/n)[n]:n               //是否继续添加用户
 WINDAKA-OLT(config)#
 ```
-##三、确认业务板、上行板
+## 三、确认业务板、上行板
+
 ```
 WINDAKA-OLT(config)#display board 0 //查看当前已发现的插板，0代表框
 WINDAKA-OLT(config)#board confirm 0 //确认单板，使OLT的EPON端口激光器打开
@@ -40,11 +45,12 @@ WINDAKA-OLT(config)#board confirm 0 //确认单板，使OLT的EPON端口激光�
 >> type3 为保证带宽的同时设置最大带宽值；
 >> type4 为仅设定最大带宽模式；
 >> type5 为3种模式的综合，即设置最大带宽，在保证带宽的同时采用固定带宽模式。
- 
+
 ```
 WINDAKA-OLT(config)#dba-profile add profile-id 111  type3 assure 1024 max 102400
 ```
-##五创建链路模板，ONU模板
+## 五创建链路模板，ONU模板
+
 ```
 WINDAKA-OLT(config)#ont-srvprofile gpon profile-name FTTH
 WINDAKA-OLT(config-gpon-srvprofile-1)#ont-port eth 4 pots 2
@@ -80,7 +86,10 @@ WINDAKA-OLT(config-gpon-lineprofile-10)#gem mapping 4 0 vlan 101 //gemport 4 的
 WINDAKA-OLT(config-gpon-lineprofile-10)#commit
 WINDAKA-OLT(config-gpon-lineprofile-10)#quit
 ```
-##四、创建VLAN
+
+
+## 四、创建VLAN
+
 ```
 WINDAKA-OLT(config)#vlan 100 smart  //创建网管VLAN 100
 WINDAKA-OLT(config)#vlan 800 smart //创建对讲外层VLAN
@@ -91,7 +100,8 @@ WINDAKA-OLT(config)#port vlan 2500 to 2600 0/17 0 //设置二层VLAN传给上行
 WINDAKA-OLT(config)#port vlan 800 0/18 0 //设置对讲VLAN传给上行口
 ```
 
-##五、设置VLAN透传
+## 五、设置VLAN透传
+
 ```
 WINDAKA-OLT(config)#interface giu 0/17 //进入17板
 WINDAKA-OLT(config-if-giu-0/17)#
@@ -101,21 +111,16 @@ WINDAKA-OLT(config-if-giu-0/17)#
 
 
 
+## 六、创建业务模板
 
-
-
-
-
-
-
-##六、创建业务模板
 ```
 WINDAKA-OLT(config)#ont-srvprofile gpon profile-id 10
 WINDAKA-OLT(config-gpon-srvprofile-10)#ont-port pots 1 eth 2 //ONT能力，支持1个电话业务，2个网络接口
 WINDAKA-OLT(config-gpon-srvprofile-10)#commit
 WINDAKA-OLT(config-gpon-srvprofile-10)#quit
 ```
-##七、创建ONU业务
+## 七、创建ONU业务
+
 ```
 WINDAKA-OLT(config)#interface gpon 0/1
 WINDAKA-OLT(config-if-gpon-0/1)#port 0 ont-auto-find enable
