@@ -53,6 +53,7 @@
 		2. list_for_each()
 
 ## 锁操作
+
 ### 原子操作
 	1. atomic_t v = ATOMIC_INIT(1) 初始化原子操作变量为1
 	2. atomic_inc(&v) 对变量加1操作
@@ -204,3 +205,14 @@ $ cat ps
 ```
 $ cat > ps
 ```
+
+
+
+
+
+### 查看内核log信息
+
+```
+$ dmesg
+```
+
