@@ -90,7 +90,7 @@ module.exports = {
 				]
 			},
 			{
-				title: 'Linux 文档',
+				title: 'Linux 驱动开发',
 				collapsable: true,
 				children: [
 					'/markdown/kernel/driver',
@@ -152,6 +152,6 @@ module.exports = {
 
 
 		]
-
+	
 	}
 }
