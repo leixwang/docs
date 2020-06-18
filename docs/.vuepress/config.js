@@ -159,8 +159,6 @@ module.exports = {
 					'/markdown/tools/GitBlit',
 				]
 			},
-
-
 		]
 	
 	}
