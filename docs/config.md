@@ -149,9 +149,16 @@ module.exports = {
 					'/markdown/psychology/36ask',
 				]
 			},
-
-
+			{
+				title: '常用的工具',
+				collapsable: true,
+				children: [
+					'/markdown/tools/python',
+					'/markdown/tools/github',
+					'/markdown/tools/vscode',
+					'/markdown/tools/GitBlit',
+				]
+			},
 		]
-	
 	}
 }
