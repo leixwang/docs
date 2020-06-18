@@ -162,3 +162,50 @@ git reset --hard upstream/dev
 git rebase upstream/dev
 git push -f origin master
 ```
+
+
+
+
+
+# git init 操作
+
+
+
+Git 全局设置
+
+```shell
+git config --global user.name "wanglei" 
+git config --global user.email "wanglei@micous.com"
+```
+
+创建一个新仓库
+
+```sh
+git clone https://gitlab.int.nbt.ren/gsc/activity.git 
+cd activity touch README.md 
+git add README.md 
+git commit -m "add README" 
+git push -u origin master
+```
+
+推送现有文件夹
+
+```shell
+cd existing_folder 
+git init 
+git remote add origin https://gitlab.int.nbt.ren/gsc/activity.git 
+git add . 
+git commit -m "Initial commit" 
+git push -u origin master
+```
+
+推送现有的 Git 仓库
+
+```shell
+cd existing_repo 
+git remote rename origin old-origin 
+git remote add origin https://gitlab.int.nbt.ren/gsc/activity.git 
+git push -u origin --all 
+git push -u origin --tags
+```
+

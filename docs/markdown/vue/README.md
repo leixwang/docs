@@ -176,3 +176,86 @@ We will discuss these when we introduce the associated concepts later in the gui
 $ vue create vue-demo
 ```
 
+
+
+
+
+
+
+
+
+
+
+
+
+## 增加多语言
+
+1. 在项目增加vue-i18插件
+
+   ```
+   $ npm install vue-i18n --save
+   ```
+
+   
+
+2. 增加多语言文档
+
+   ```
+   vim .src/common/lang/zh.js
+   ```
+
+   ```json
+   export default {
+       menu: {
+           title: '标题'
+       },
+       info: {
+           info: '信息'
+   
+       }
+   }
+   ```
+
+   
+
+3. 配置多语言文档, 将element-ui. 需要安装 element-ui 控件.
+
+   ```diff
+    import Vue from 'vue'
+    import App from './App.vue'
+   +import VueI18n from 'vue-i18n'
+   +import zh from './common/lang/zh'
+   +import en from './common/lang/en'
+   +import enLocale from 'element-ui/lib/locale/lang/en'
+   +import zhLocale from 'element-ui/lib/locale/lang/zh-CN'
+   +import ElementUI from 'element-ui'
+   +import 'element-ui/lib/theme-chalk/index.css'
+   +import 'element-ui/lib/theme-chalk/display.css'
+   +
+   +Vue.use(VueI18n)
+   +
+   +const i18n = new VueI18n({
+   +  locale: 'en',
+   +  messages: {
+   +    'zh': {
+   +      ...zh,
+   +      ...zhLocale
+   +    },
+   +    'en': {
+   +      ...en,
+   +      ...enLocale
+   +    }
+   +  }
+   +})
+   +Vue.use(ElementUI, {
+   +  i18n: (key, value) => i18n.t(key, value)
+   +})
+   +
+   
+    Vue.config.productionTip = false
+   
+    new Vue({
+   +  i18n,
+      render: h => h(App),
+    }).$mount('#app')
+   ```
