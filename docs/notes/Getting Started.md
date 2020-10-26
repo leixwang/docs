@@ -1,3 +1,10 @@
+---
+tags: [Import-108c]
+title: Getting Started
+created: '2020-01-02T07:42:01.292Z'
+modified: '2020-02-20T05:15:41.022Z'
+---
+
 # Getting Started
 
 ## Installation
@@ -155,107 +162,3 @@ In addition, the template supports some advanced features such as:
 - Auto injection and XSS prevention when embedding Vuex state for client-side hydration.
 
 We will discuss these when we introduce the associated concepts later in the guide.
-
-
-
-
-
-
-
-# VUE基本DEMO
-
-频繁用 vue 创建新的项目, 基本功能模块基本一样, 所以为了不必每个项目都重新搭建基本框架. 也为快速的创建一个上期而做的 DEMO. 下面记录搭建基本框架的步骤和方法. 随着软件包的更新而更新.
-
-
-
-## 创建vue项目
-
-
-
-```vue
-$ vue create vue-demo
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-## 增加多语言
-
-1. 在项目增加vue-i18插件
-
-   ```
-   $ npm install vue-i18n --save
-   ```
-
-   
-
-2. 增加多语言文档
-
-   ```
-   vim .src/common/lang/zh.js
-   ```
-
-   ```json
-   export default {
-       menu: {
-           title: '标题'
-       },
-       info: {
-           info: '信息'
-   
-       }
-   }
-   ```
-
-   
-
-3. 配置多语言文档, 将element-ui. 需要安装 element-ui 控件.
-
-   ```diff
-    import Vue from 'vue'
-    import App from './App.vue'
-   +import VueI18n from 'vue-i18n'
-   +import zh from './common/lang/zh'
-   +import en from './common/lang/en'
-   +import enLocale from 'element-ui/lib/locale/lang/en'
-   +import zhLocale from 'element-ui/lib/locale/lang/zh-CN'
-   +import ElementUI from 'element-ui'
-   +import 'element-ui/lib/theme-chalk/index.css'
-   +import 'element-ui/lib/theme-chalk/display.css'
-   +
-   +Vue.use(VueI18n)
-   +
-   +const i18n = new VueI18n({
-   +  locale: 'en',
-   +  messages: {
-   +    'zh': {
-   +      ...zh,
-   +      ...zhLocale
-   +    },
-   +    'en': {
-   +      ...en,
-   +      ...enLocale
-   +    }
-   +  }
-   +})
-   +Vue.use(ElementUI, {
-   +  i18n: (key, value) => i18n.t(key, value)
-   +})
-   +
-   
-    Vue.config.productionTip = false
-   
-    new Vue({
-   +  i18n,
-      render: h => h(App),
-    }).$mount('#app')
-   ```
