@@ -159,6 +159,14 @@ module.exports = {
 					'/markdown/tools/GitBlit',
 				]
 			},
+			{
+				title: '大数据分析',
+				collapsable: true,
+				children: [
+					'/markdown/data/src',
+					'/markdown/data/linux',
+				]
+			},
 		]
 	}
 }
